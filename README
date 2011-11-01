@@ -1,0 +1,31 @@
+****************** README ******************
+
+README DATE: Nov 1 2011
+
+LINCESE
+* ----------------------------------------------------------------------------
+* "THE BEER-WARE LICENSE" (Revision 42):
+* <pusic93@gmail.com> wrote this file. As long as you retain this notice you
+* can do whatever you want with this stuff. If we meet some day, and you think
+* this stuff is worth it, you can buy me a beer in return. Luka Pusic
+* ----------------------------------------------------------------------------
+
+Souncloud music downloader for Unix, Linux & Mac OS X v3.0
+
+SYSTEM PREREQUISITES
+-wget or curl
+
+INSTRUCTIONS
+-give the script executable permissions (chmod +x ./soundcloud.sh)
+-usage: soundcloud.sh [DJ-URL]
+
+NEW FEATURES
+-supports multiple page downloading
+
+BUG FIXES
+-won't fail if the artists landing page isn't tracks
+
+KNOWN ISSUES
+-only downloads public tracks
+
+********************************************
