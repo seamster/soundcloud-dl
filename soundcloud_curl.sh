@@ -1,13 +1,14 @@
 #!/bin/bash
-#soundcloud music downloader by http://360percents.com - v3.0 on Nov 1st 2011
+#soundcloud music downloader by http://360percents.com v3.0
 #Author: Luka Pusic <pusic93@gmail.com>
+
 echo "[i] soundcloud.com music downloader by http://360percents.com (cURL version)";
 
 if [ -z "$1" ]; then
-	echo "";echo "[i] Usage: `basename $0` [DJ-URL]";echo "";exit
+	echo "";echo "[i] Usage: `basename $0` http://soundcloud.com/link_with_tracks_on_page";echo "";exit
 fi
 
-pages=`curl -s --user-agent 'Mozilla/5.0' "$1/tracks" | tr '"' "\n" | grep "tracks?page=" | sort -u | tail -n 1 | cut -d "=" -f 2`
+pages=`curl -s --user-agent 'Mozilla/5.0' "$1" | tr '"' "\n" | grep "tracks?page=" | sort -u | tail -n 1 | cut -d "=" -f 2`
 
 if [ -z "$pages" ]; then
 	pages=1
@@ -21,7 +22,7 @@ if [ "$pages" = "1" ]; then
 else
 	this=`curl -s --user-agent 'Mozilla/5.0' $1/tracks?page=$page`;
 fi
-songs=`echo "$this" | grep 'streamUrl' | tr '"' "\n" | grep 'http://media.soundcloud.com/stream/'`;
+songs=`echo "$this" | grep 'streamUrl' | tr '"' "\n" | sed 's/\\u0026amp;/\&/' | grep 'http://media.soundcloud.com/stream/' | sed 's/\\\\//'`;
 songcount=`echo "$songs" | wc -l`
 titles=`echo "$this" | grep 'title":"' | tr ',' "\n" | grep 'title' | cut -d '"' -f 4`
 
