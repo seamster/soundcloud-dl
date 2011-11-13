@@ -20,14 +20,14 @@ do
 if [ "$pages" = "1" ]; then
 	this=`wget -q --user-agent='Mozilla/5.0' $1 -O -`;
 else
-	this=`wget -q --user-agent='Mozilla/5.0' $1/tracks?page=$page -O -`;
+	this=`wget -q --user-agent='Mozilla/5.0' $1?page=$page -O -`;
 fi
 songs=`echo "$this" | grep 'streamUrl' | tr '"' "\n" | sed 's/\\u0026amp;/\&/' | grep 'http://media.soundcloud.com/stream/' | sed 's/\\\\//'`;
 songcount=`echo "$songs" | wc -l`
 titles=`echo "$this" | grep 'title":"' | tr ',' "\n" | grep 'title' | cut -d '"' -f 4`
 
 if [ -z "$songs" ]; then
-	echo "[!] No song found at $1." && exit
+	echo "[!] No songs found at $1." && exit
 fi
 
 echo "[+] Downloading $songcount songs from page $page..."
